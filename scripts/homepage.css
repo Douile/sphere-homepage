@@ -1,0 +1,114 @@
+body {
+  background: #1f1f1f;
+  color: #ededed;
+}
+.maincont {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 300px;
+  margin-top: -150px;
+  margin-left: -150px;
+  border-radius: 100%;
+  background: #1f1f1f;
+  border: 6px solid #ededed;
+  transition: 1s ease width, 1s ease height; 1s ease margin-top, 1s ease margin-left;
+  z-index: 2;
+}
+.maincont[size] {
+  width: attr("size");
+  height: attr("size");
+}
+.maincont[offset] {
+  margin-left: attr("offset");
+  margin-right: attr("offset");
+}
+.contLink {
+  position: fixed;
+  display: block;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  transform: translate(0px, 0px);
+  border: 3px solid #ededed;
+  border-radius: 7px;
+  color: #1a1a1a;
+  padding: 5px;
+  cursor: pointer;
+  font-family: arial;
+  transition: 1s ease transform, 1s ease background;
+  z-index: 2;
+}
+.contLink[href] {
+  background: #ededed;
+}
+.content > .contLine {
+  display:block;
+  background: #dedede;
+  position:fixed;
+  height:30px;
+  width:150px;
+  margin-top: -15px;
+  margin-left: -75px;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+  z-index: 1;
+  transition: .5s ease opacity;
+}
+.content:hover > .contLine {
+  opacity: 1;
+}
+.contLink > img {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: .5s ease opacity;
+}
+.contLink > img[src] {
+  opacity: 1;
+}
+#linkform {
+  font-family: arial;
+  position: fixed;
+  left: 1%;
+  top: 1%;
+  height: 98%;
+  width: 18%;
+  border-radius: 5px;
+  background: #2e2e2e;
+  padding: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: .85s ease opacity;
+}
+#linkform[linkid] {
+  opacity: 1;
+  pointer-events: all;
+}
+#linkform::before {
+  content: "Link " attr(linkid);
+}
+#linkform > input {
+  margin-top: 3px;
+  margin-bottom: 5px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #000;
+  padding: 2px;
+  outline: none;
+}
+#linkform > input:focus {
+  border-bottom: 2px solid #0bae0b;
+}
+#linkform > img {
+  width: 100%;
+}
+* {
+  box-sizing: border-box;
+}
