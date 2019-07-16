@@ -6,23 +6,15 @@ body {
   position: fixed;
   left: 50%;
   top: 50%;
-  width: 300px;
-  height: 300px;
-  margin-top: -150px;
-  margin-left: -150px;
+  width: var(--size);
+  height: var(--size);
+  margin-top: var(--offset);
+  margin-left: var(--offset);
   border-radius: 100%;
   background: #1f1f1f;
   border: 6px solid #ededed;
-  transition: 1s ease width, 1s ease height; 1s ease margin-top, 1s ease margin-left;
+  transition: 1s ease width, 1s ease height, 1s ease margin-top, 1s ease margin-left;
   z-index: 2;
-}
-.maincont[size] {
-  width: attr("size");
-  height: attr("size");
-}
-.maincont[offset] {
-  margin-left: attr("offset");
-  margin-right: attr("offset");
 }
 .contLink {
   position: fixed;
@@ -109,6 +101,37 @@ body {
 #linkform > img {
   width: 100%;
 }
+.count-button {
+  --v-offset: calc(50vh - var(--size) * 0.4);
+  position: fixed;
+  cursor: pointer;
+  color: #000;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  border: none;
+  left: calc(50% - 20px);
+  transition: top ease 1s, opacity ease 2s;
+  opacity: 0;
+}
+.count-button:hover {
+  opacity: 1 !important;
+  transition: top ease 1s, opacity ease 1s;
+}
+.maincont:hover .count-button {
+  opacity: 0.4;
+}
+.count-increase {
+  position: fixed;
+  top: var(--v-offset);
+}
+.count-decrease {
+  position: fixed;
+  bottom: var(--v-offset);
+}
+
 * {
+  --size: calc(50vmin - 200px);
+  --offset: calc(var(--size) / -2);
   box-sizing: border-box;
 }
