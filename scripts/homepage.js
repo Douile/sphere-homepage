@@ -176,7 +176,7 @@ function loadLinks() {
 
 function loadLinksCookie() {
   let text = decodeURIComponent( parseCookie()['sphere-links'] ),
-  data = {};
+  data = [];
   try {
     data = JSON.parse(text);
   } catch(e) {}
@@ -184,7 +184,7 @@ function loadLinksCookie() {
 }
 
 function loadLinksLocalStorage() {
-  let data = {};
+  let data = [];
   try {
     data = JSON.parse(window.localStorage.getItem('sphere-links'));
   } catch(e) {}
@@ -202,7 +202,7 @@ window.addEventListener("contextmenu",mouseHandler);
 window.addEventListener("error",loadErrorHandler, { capture: true, passive: true }, true);
 query("#linkurl").addEventListener("keyup",changeUrl);
 
-var links;
+window.links = [];
 /* [{url:"https://duckduckgo.com/?kae=d&kax=-1&kad=en_GB&kac=-1&k1=-1&kaj=m&kam=osm&kak=-1&kaq=-1&kao=-1&kap=-1&kp=-2&kz=1&kt=a&ks=n&kw=s&km=l&ka=a&ku=-1&kai=1&kg=p",ic:"https://duckduckgo.com/assets/icons/meta/DDG-icon_256x256.png"},
   {url:"https://www.youtube.com/",ic:"https://www.youtube.com/yts/img/favicon_144-vfliLAfaB.png"},
   {url:"https://google.co.uk/",ic:"https://avatars0.githubusercontent.com/u/1342004?s=400&v=4"},
