@@ -1,0 +1,20 @@
+{
+    "name": "Homepage",
+    "short_name": "Homepage",
+    "icons": [
+        {
+            "src": "android-chrome-192x192.png?v=XBJYneG5Ge",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "android-chrome-512x512.png?v=XBJYneG5Ge",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#1f1f1f",
+    "background_color": "#1f1f1f",
+    "start_url": "https://douile.github.io/sphere-homepage",
+    "display": "standalone"
+}
