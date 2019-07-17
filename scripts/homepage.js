@@ -193,7 +193,7 @@ function loadLinksLocalStorage() {
 
 function refreshLinks() {
   window.links = loadLinks();
-  document.querySelectorAll('.contLink').forEach(n => n.remove());
+  document.querySelectorAll('.contLink, style').forEach(n => n.remove());
   parseLinks(window.links);
 }
 

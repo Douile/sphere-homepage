@@ -1,5 +1,5 @@
 body {
-  background: #1f1f1f;
+  background: var(--background);
   color: #ededed;
 }
 .maincont {
@@ -26,7 +26,7 @@ body {
   margin-left: -50px;
   margin-top: -50px;
   transform: translate(0px, 0px);
-  border: 3px solid #ededed;
+  border: 3px solid var(--background);
   border-radius: 7px;
   color: #1a1a1a;
   padding: 5px;
@@ -114,6 +114,7 @@ body {
   left: calc(50% - 20px);
   transition: top ease 1s, opacity ease 2s;
   opacity: 0;
+  border-radius: 7px;
 }
 .count-button:hover {
   opacity: 1 !important;
@@ -134,5 +135,6 @@ body {
 * {
   --size: calc(50vmin - 200px);
   --offset: calc(var(--size) / -2);
+  --background: #1f1f1f;
   box-sizing: border-box;
 }
