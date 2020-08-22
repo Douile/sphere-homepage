@@ -221,7 +221,7 @@ function createSettingsLink() {
   parent.appendChild(createElement('img', { class: 'settings-link-icon' }));
   parent.appendChild(createElement('input', { name: 'link', type: 'text', placeholder: 'Link URL' }));
   parent.appendChild(createElement('input', { name: 'icon', type: 'text', placeholder: 'Icon URL' }));
-  parent.appendChild(createElement('img', { class: 'settings-link-remove', src: './assets/minus.svg' }));
+  parent.appendChild(createElement('img', { class: 'settings-link-remove', src: './assets/trash.svg' }));
   return parent;
 }
 
