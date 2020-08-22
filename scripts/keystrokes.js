@@ -1,6 +1,6 @@
 /*
 keystrokes.js - An extinsible key-stroke binder for the web
-Copyright (C) 2019  Douile
+Copyright (C) 2019-2020  Douile
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

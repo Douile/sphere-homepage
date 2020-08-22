@@ -1,21 +1,22 @@
 body {
   background: var(--background);
-  color: #ededed;
+  color: var(--foreground);
 }
-.maincont {
+
+.main-container {
   position: fixed;
-  left: 50%;
-  top: 50%;
+  left: 50vw;
+  top: 50vh;
   width: var(--size);
   height: var(--size);
-  margin-top: var(--offset);
-  margin-left: var(--offset);
   border-radius: 100%;
-  background: #1f1f1f;
-  border: 6px solid #ededed;
+  background: var(--backgrond);
+  border: 6px solid var(--foreground);
   transition: 1s ease width, 1s ease height, 1s ease margin-top, 1s ease margin-left;
   z-index: 2;
+  transform: translate(var(--offset), var(--offset));
 }
+
 .contLink {
   position: fixed;
   display: block;
@@ -28,16 +29,18 @@ body {
   transform: translate(0px, 0px);
   border: 3px solid var(--background);
   border-radius: 7px;
-  color: #1a1a1a;
+  color: var(--foreground);
   padding: 5px;
   cursor: pointer;
   font-family: arial;
   transition: 1s ease transform, 1s ease background;
   z-index: 2;
 }
+
 .contLink[href] {
-  background: #ededed;
+  background: var(--foreground);
 }
+
 .content > .contLine {
   display:block;
   background: #dedede;
@@ -52,9 +55,11 @@ body {
   z-index: 1;
   transition: .5s ease opacity;
 }
+
 .content:hover > .contLine {
   opacity: 1;
 }
+
 .contLink > img {
   width: 100%;
   height: 100%;
@@ -62,79 +67,161 @@ body {
   opacity: 0;
   transition: .5s ease opacity;
 }
+
 .contLink > img[src] {
   opacity: 1;
 }
-#linkform {
-  font-family: arial;
-  position: fixed;
-  left: 1%;
-  top: 1%;
-  height: 98%;
-  width: 18%;
-  border-radius: 5px;
-  background: #2e2e2e;
-  padding: 5px;
-  pointer-events: none;
+
+.modal-container {
   opacity: 0;
-  transition: .85s ease opacity;
+  pointer-events: none;
+  z-index: 15;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.45);
+  transition: 1s ease opacity;
+  justify-content: center;
+  align-items: center;
 }
-#linkform[linkid] {
+
+.modal-container[data-active=true] {
   opacity: 1;
   pointer-events: all;
+  padding: 20px;
 }
-#linkform::before {
-  content: "Link " attr(linkid);
+
+.modal {
+  flex-basis: 800px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  background: var(--foreground);
+  color: var(--background);
+  border-radius: 15px;
+  padding: 20px;
+  height: max-content;
+  overflow: auto;
 }
-#linkform > input {
-  margin-top: 3px;
-  margin-bottom: 5px;
+
+h1 {
+  margin-top: 0;
+}
+
+.modal-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  counter-reset: list-item;
+}
+
+.settings-link {
+  display: grid;
+  grid-template-columns: auto auto 6fr 5fr auto;
+  grid-template-rows: 1fr;
+  grid-gap: 5px;
+  align-items: center;
   width: 100%;
-  border: none;
-  border-bottom: 2px solid #000;
-  padding: 2px;
-  outline: none;
+  padding: 5px;
 }
-#linkform > input:focus {
-  border-bottom: 2px solid #0bae0b;
+
+.modal-list-counter::before {
+  counter-increment: list-item;
+  content: counter(list-item);
 }
-#linkform > img {
-  width: 100%;
-  max-height: 50vh;
+
+.settings-link-icon {
+  width: 20px;
+  height: 20px;
 }
-.count-button {
-  --v-offset: calc(50vh - var(--size) * 0.4);
-  position: fixed;
+
+.settings-link-remove {
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+}
+
+.settings-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-new-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-new-link button {
+  border: 1px dashed #000;
+}
+
+.settings-buttons button, .settings-new-link button {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 200px;
+  margin: 5px;
+}
+
+button {
+  border: 1px solid rgba(0,0,0,0);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-weight: bold;
   color: #000;
-  background: #fff;
-  width: 40px;
-  height: 40px;
-  border: none;
-  left: calc(50% - 20px);
-  transition: top ease 1s, opacity ease 2s;
-  opacity: 0;
-  border-radius: 7px;
 }
-.count-button:hover {
-  opacity: 1 !important;
-  transition: top ease 1s, opacity ease 1s;
+
+button:hover {
+  border: 1px solid #000;
 }
-.maincont:hover .count-button {
-  opacity: 0.4;
+
+.button-reset {
+  background-color: #fede56;
 }
-.count-increase {
+
+.button-cancel {
+  background-color: #cd2323;
+}
+
+.button-save {
+  background-color: #34cd56;
+}
+
+#settings-button {
   position: fixed;
-  top: var(--v-offset);
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 10px;
 }
-.count-decrease {
-  position: fixed;
-  bottom: var(--v-offset);
+
+#settings-button:hover {
+  animation: spin 1s linear 0s infinite;
+  transform: scale(1.2, 1.2);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 * {
-  --size: calc(50vmin - 200px);
+  font-family: arial;
+  --size: max(calc(50vmin - 200px), 15px);
   --offset: calc(var(--size) / -2);
+  --foreground: #ffffff;
   --background: #1f1f1f;
   box-sizing: border-box;
 }

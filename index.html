@@ -3,7 +3,8 @@
 <title>Home</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="./scripts/homepage.css">
-<script src="./scripts/keystrokes.js"></script>
+<script src="./scripts/keystrokes.js" async=""></script>
+<script src="./scripts/homepage.js" defer=""></script>
 <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png?v=XBJYneG5Ge">
 <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png?v=XBJYneG5Ge">
 <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png?v=XBJYneG5Ge">
@@ -17,15 +18,17 @@
 <meta name="theme-color" content="#1f1f1f">
 </head>
 <body>
-<div class="maincont">
-<img class="count-button count-increase" alt="+" src="./assets/plus.svg"><img class="count-button count-decrease" alt="-" src="./assets/minus.svg">
+<div class="main-container"></div>
+<div class="modal-container settings-container">
+  <div class="modal settings">
+    <h1>Settings</h1>
+    <div class="modal-list settings-links">
+      <div class="settings-link"><span class="modal-list-counter"></span><img class="settings-link-icon"><input name="link" type="text" placeholder="Link URL"><input name="icon" type="text" placeholder="Icon URL"><img class="settings-link-remove" src="./assets/minus.svg"></div>
+    </div>
+    <div class="settings-new-link"><button class="button-new">New Link</button></div>
+    <div class="settings-buttons"><button class="button-reset">Reset</button><button class="button-cancel">Cancel</button><button class="button-save">Save</button></div>
+  </div>
 </div>
-<div id="linkform">
-<input id="linkurl" type="url" placeholder="Website Url" cols="100"><br>
-<input id="linkfavicon" type="url" placeholder="Icon Url" cols="100"><br>
-<img id="linkfaviconprev" alt="Icon preview"><br>
-<input id="linksubmit" type="submit" value="Save">
-</div>
-<script src="./scripts/homepage.js"></script>
+<img id="settings-button" src="./assets/icon.svg"></img>
 </body>
 </html>
