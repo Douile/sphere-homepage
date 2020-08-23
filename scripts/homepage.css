@@ -121,8 +121,9 @@ h1 {
 }
 
 .settings-link {
+  --index: attr(data-index);
   display: grid;
-  grid-template-columns: auto auto 6fr 5fr auto;
+  grid-template-columns: auto auto auto 6fr 5fr auto;
   grid-template-rows: 1fr;
   grid-gap: 5px;
   align-items: center;
@@ -130,9 +131,10 @@ h1 {
   padding: 5px;
 }
 
-.modal-list-counter::before {
+.modal-list-counter::after {
   counter-increment: list-item;
-  content: counter(list-item);
+  /*content: counter(list-item);*/
+  content: var(--index);
 }
 
 .settings-link-icon {
@@ -144,6 +146,15 @@ h1 {
   width: 20px;
   height: 20px;
   cursor: pointer;
+}
+
+.settings-link-drag {
+  height: 20px;
+  cursor: grab;
+}
+
+body[dragging] {
+  cursor: grabbing !important;
 }
 
 .settings-buttons {

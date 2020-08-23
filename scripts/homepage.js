@@ -217,6 +217,7 @@ function refreshLinks(dontLoad) {
 
 function createSettingsLink() {
   const parent = createElement('div', { class: 'settings-link' });
+  parent.appendChild(createElement('img', { class: 'settings-link-drag', src: './assets/drag-bar.svg' }));
   parent.appendChild(createElement('span', { class: 'modal-list-counter' }));
   parent.appendChild(createElement('img', { class: 'settings-link-icon' }));
   parent.appendChild(createElement('input', { name: 'link', type: 'text', placeholder: 'Link URL' }));
@@ -227,15 +228,18 @@ function createSettingsLink() {
 
 function renderSettingsLink(el, link, index) {
   el.setAttribute('data-index', index);
-  el.children[1].src = link.ic;
-  el.children[2].value = link.url;
-  el.children[3].value = link.ic;
+  el.style.order = index;
+  if (link === null) return;
+  el.children[2].src = link.ic;
+  el.children[3].value = link.url;
+  el.children[4].value = link.ic;
 }
 
 function fetchSettingsLinks() {
-  const links = [];
-  for (let item of document.querySelectorAll('.settings-container .settings-links .settings-link')) {
-    links.push({ url: item.children[2].value, ic: item.children[3].value });
+  const nodes = document.querySelectorAll('.settings-link');
+  const links = new Array(nodes.length);
+  for (let item of nodes) {
+    links[parseInt(item.getAttribute('data-index'))] = { url: item.children[3].value, ic: item.children[4].value };
   }
   return links;
 }
@@ -273,6 +277,50 @@ function showSettingsModal(links) {
 window.addEventListener('click', clickHandler);
 window.addEventListener('error', loadErrorHandler, { capture: true, passive: true }, true);
 window.addEventListener('resize', resizeHandler, { passive: true });
+
+let activeDrag = null;
+window.addEventListener('mousedown', function(e) {
+  if (!e.target.classList.contains('settings-link-drag')) return;
+  e.preventDefault();
+  const activeNode = e.target.parentElement;
+  const activeIndex = activeNode.getAttribute('data-index');
+  activeDrag = { node: activeNode, nodes: Array.from(activeNode.parentNode.children).filter(function(node) {return node.getAttribute('data-index') !== activeIndex}) };
+  activeDrag.nodeCount = activeDrag.nodes.length;;
+  document.body.setAttribute('dragging', 'true');
+});
+window.addEventListener('mousemove', function(e) {
+  if (activeDrag === null) return;
+  const mouseY = e.clientY;
+  let positions = [];
+  for (let i=0;i<activeDrag.nodeCount;i++) {
+    positions.push({ i, y: activeDrag.nodes[i].getBoundingClientRect().top });
+  }
+  positions = positions.sort(function(a,b) { return a.y - b.y });
+  let newPos = true;
+  for (let i=0;i<activeDrag.nodeCount;i++) {
+    if (positions[i].y > mouseY) {
+      if (newPos) {
+        activeDrag.node.setAttribute('data-index', i);
+        activeDrag.node.style.order = i;
+        newPos = false;
+      }
+      activeDrag.nodes[positions[i].i].setAttribute('data-index', i+1);
+      activeDrag.nodes[positions[i].i].style.order = i+1;
+    } else {
+      activeDrag.nodes[positions[i].i].setAttribute('data-index', i);
+      activeDrag.nodes[positions[i].i].style.order = i;
+    }
+  }
+  if (newPos) {
+    activeDrag.node.setAttribute('data-index', activeDrag.nodeCount);
+    activeDrag.node.style.order = activeDrag.nodeCount;
+  }
+}, { passive: true });
+window.addEventListener('mouseup', function() {
+  if (activeDrag === null) return;
+  document.body.removeAttribute('dragging');
+  activeDrag = null;
+})
 
 window.links = [];
 
